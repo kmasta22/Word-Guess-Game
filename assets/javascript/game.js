@@ -20,8 +20,6 @@
 document.addEventListener('DOMContentLoaded', function(){
     
 
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
 var songArray = ["Wonderwall", "I Want You Back", "Sex and Candy", "Tubthumping", "Friday Im In Love", "The Sign", "Love Fool", "Kiss from a Rose", 
 "Truly Madly Deeply", "My Heart Will Go On", "All My Life", "Baby One More Time", "Girl On TV"];
 
@@ -59,9 +57,9 @@ var lettersAlreadyGuessed = document.getElementById("lettersAlreadyGuessedText")
 //i know there is a way to do this using an array of objects but I thought this would be easier to comprehend
 
 
-//create a function here that changes the html dynamically for songName
+//create a function here that changes the html dynamically for songName, splits the songname into an array so you can check what characters are in it
 
-var randomSong = songArray[Math.floor(Math.random()*songArray.length)];
+var randomSong = songArray[Math.floor(Math.random()*songArray.length)]
 
 var wordArray = randomSong.split("");
 
@@ -72,47 +70,48 @@ var matchingArtistName = artistArray[indexOfRandomSong];
 console.log(indexOfRandomSong);
 console.log(randomSong);
 console.log(matchingArtistName);
+console.log(wordArray);
 
 
 for (i=0; i < wordArray.length; i++){
 
-        console.log("_ ");
+        letterAsLowercase = wordArray[i].toLowerCase();
 
-        //if(wordArray.charAt[i] === "a" || "b" || "c" || "d" || "e" || "f" || "g" || "h" || "i" || "j" || "k" || "l" || "m" || "n" || "o" || "p" || "q" || "r" || "s" || "t" || "u" || "v" || "w" || "x" || "y" || "z"){
+        console.log(letterAsLowercase);
 
+        if(letterAsLowercase === ("a" || "b" || "c" || "d" || "e" || "f" || "g" || "h" || "i" || "j" || "k" || "l" || "m" || "n" || "o" || "p" || "q" || "r" || "s" || "t" || "u" || "v" || "w" || "x" || "y" || "z")){
 
-        songNameElement.innerHTML = ("_ ");  
+        console.log("this is a letter");
+
+        //songNameElement.innerHTML = ("_ ");  
 
         artistNameElement.innerHTML = (matchingArtistName);
 
-        //}
-        //else{
-
-        //    songNameElement.innerHTML =(" ");
-       // }
+        }
+        else if(wordArray.includes(" ")){
+            console.log("this is a space");
+           songNameElement.innerHTML =(" ");
+        }
 
 
         
             
 }
 
+//onKeyUp assign key to letter variable and make it lowercase
 
 document.onkeyup = function (event) {
 
-//when key is pressed, assign it to var letter, then make it lowercase, also make randomSong variable lowercase so you can compare the strings easily
 letter = event.key;
 letter = letter.toLowerCase();
 randomSong = randomSong.toLowerCase();
 
             console.log(letter);
-            console.log(randomSong);
 
 
 // if letter chosen is equal to a letter in the randomSong then print msg to console
 
-        var doesSongIncludeLetterChosen = randomSong.includes(letter);
-
-        if (doesSongIncludeLetterChosen){
+      if (randomSong.includes(letter)){
 
             
 
