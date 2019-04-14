@@ -1,0 +1,74 @@
+
+h1{
+    font-family: 'Anton', sans-serif;
+    font-size: 2em;
+    
+}
+
+h2{
+
+    font-family: 'Anton', sans-serif;
+    font-size: 1em;
+
+}
+
+p {
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5em;
+}
+
+
+
+.layoutGrid {
+
+    display: grid;
+    grid-template-columns: 850px auto;
+    grid-template-rows: auto;
+   
+}
+
+.leftColumn {
+
+    z-index: 1;
+    grid-row-start: 1;
+    grid-column-start: 1;
+     
+}
+
+.rightColumn {
+    z-index: 1;
+    grid-row-start: 1;
+    grid-column-start: 2;
+
+  
+}
+
+
+.artistName {
+
+    z-index: 2;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    left: 130px;
+    bottom: 420px;
+    font-size: .75em;
+    
+    
+}
+
+.songName {
+
+    z-index: 2;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    left: 130px;
+    bottom: 380px;
+    font-size: .75em;
+    
+    
+}
