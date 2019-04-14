@@ -17,6 +17,9 @@
 //   [11] Baby one more time - Britney Spears
 //   [12] Girl on TV - LFO
 
+document.addEventListener('DOMContentLoaded', function(){
+    
+
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 var songArray = ["Wonderwall", "I Want You Back", "Sex and Candy", "Tubthumping", "Friday Im In Love", "The Sign", "Love Fool", "Kiss from a Rose", 
@@ -31,11 +34,11 @@ var songAudioFile = ["wonderwall.mp3", "iwantyouback.mp3", "sexandcandy.mp3", "t
 
 
 
-var songNameElement = document.getElementById("#songName");
-var artistNameElement = document.getElementById("#artistName");
-var numberOfWins = document.getElementById("#numberOfWinsText");
-var numberOfGuesses = document.getElementById("#numberofGuessesText");
-var lettersAlreadyGuessed = document.getElementById("#lettersAlreadyGuessedText");
+var songNameElement = document.getElementById("songName");
+var artistNameElement = document.getElementById("artistName");
+var numberOfWins = document.getElementById("numberOfWinsText");
+var numberOfGuesses = document.getElementById("numberofGuessesText");
+var lettersAlreadyGuessed = document.getElementById("lettersAlreadyGuessedText");
 
 
 
@@ -62,21 +65,35 @@ var randomSong = songArray[Math.floor(Math.random()*songArray.length)];
 
 var wordArray = randomSong.split("");
 
+var indexOfRandomSong = songArray.indexOf(randomSong);
+
+var matchingArtistName = artistArray[indexOfRandomSong];
+
+console.log(indexOfRandomSong);
+console.log(randomSong);
+console.log(matchingArtistName);
+
 
 for (i=0; i < wordArray.length; i++){
 
         console.log("_ ");
 
-        //songNameElement.innerHTML("_ ");  
-        //this line above is the one that i stopped at and keeps giving me an error
-
-        //*****I stopped here***I was in the process of researching how to have my javascript wait until the page is loaded, i think that
-        //is why I am getting an error for the above line saying it is null 
-        //I have been stuck on this forever and have been trying to get my under scores to print to the id songName in my html */
+        //if(wordArray.charAt[i] === "a" || "b" || "c" || "d" || "e" || "f" || "g" || "h" || "i" || "j" || "k" || "l" || "m" || "n" || "o" || "p" || "q" || "r" || "s" || "t" || "u" || "v" || "w" || "x" || "y" || "z"){
 
 
+        songNameElement.innerHTML = ("_ ");  
+
+        artistNameElement.innerHTML = (matchingArtistName);
+
+        //}
+        //else{
+
+        //    songNameElement.innerHTML =(" ");
+       // }
 
 
+        
+            
 }
 
 
@@ -109,10 +126,9 @@ randomSong = randomSong.toLowerCase();
 
         }
 
+    }
 
+   });
 
-
-
-}
 
 

@@ -45,7 +45,7 @@ p {
 }
 
 
-.artistName {
+#artistName {
 
     z-index: 2;
     position: relative;
@@ -59,7 +59,7 @@ p {
     
 }
 
-.songName {
+#songName {
 
     z-index: 2;
     position: relative;
