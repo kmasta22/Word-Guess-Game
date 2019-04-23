@@ -31,101 +31,142 @@ var songAudioFile = ["wonderwall.mp3", "iwantyouback.mp3", "sexandcandy.mp3", "t
 
 
 
-
+//elements from html
 var songNameElement = document.getElementById("songName");
 var artistNameElement = document.getElementById("artistName");
-var numberOfWins = document.getElementById("numberOfWinsText");
-var numberOfGuesses = document.getElementById("numberofGuessesText");
+var numberOfWinsElement = document.getElementById("numberOfWinsText");
+var numberOfGuessesElement = document.getElementById("numberOfGuessesText"); 
 var lettersAlreadyGuessed = document.getElementById("lettersAlreadyGuessedText");
 
 
+//set number of guesses remaining to 15 at beginning of a game
+var numberofGuessesRemaining = 15;
+
+numberOfGuessesElement.innerHTML = "Number of Guesses Remaining: " + numberofGuessesRemaining;
 
 
-
-// when the page loads, I want the underscores to be put into the HTML Element "songName" dynamically using a for loop
-//I receive the song to create the underscores from the songArray and assigned to the variable random song -> this is already done
-// also i want the artist name that is at the same index number as the song name chosen by random, will display under the html element ID "artistName" 
-//i need to create a document onkeyup event that records the key presses 
-//i need to check each key press to see if it matches the word chosen and stored as "random song" 
-//if the letter matches one of the letters in the randomSong string array then that letter gets pushed into the html dynamically 
-//and replaces the underscore in that location and the counter on wins goes up
-//if it does not match then the counter on losses goes up 
-//there will be a max number of guesses allowed, and when the key presses are over that number there will be an alert that says "Sorry you've downloaded a virus"
-//if they player guesses the word right before the max number of guesses is reached, then they will receive an alert that says "you've downloaded [] song"
-//it will show them the name of the song from the array, the artist name and it will play the audio file that i've already saved in the folder
-//i included an array of audio files because i was planning on referencing the song in the array that matches the index # of the songname once they "Win" that round
-//i know there is a way to do this using an array of objects but I thought this would be easier to comprehend
-
-
-//create a function here that changes the html dynamically for songName, splits the songname into an array so you can check what characters are in it
-
+//find a random song from the songArray and save it as randomSong
 var randomSong = songArray[Math.floor(Math.random()*songArray.length)]
 
+//split the randomSong into an array of characters
 var wordArray = randomSong.split("");
 
+//gives the index of the item in the random song index
 var indexOfRandomSong = songArray.indexOf(randomSong);
 
+//gives the matching artist name for the song that is at the index of random song
 var matchingArtistName = artistArray[indexOfRandomSong];
 
+//empty array to push underscores onto
+var underscoreArray = [];
+
+//empty array for letters already guessed
+
+var lettersAlreadyGuessedArray = [];
+
+//testing
 console.log(indexOfRandomSong);
 console.log(randomSong);
 console.log(matchingArtistName);
 console.log(wordArray);
 
 
+
+//find the artist name element and change its content to the matching Artist name for the random song generated at page load
+artistNameElement.innerHTML = (matchingArtistName);
+
+//loop goes for as long as the wordArray
+//it takes each index of the wordArray which is random song that was split into characters and tests whether
+//the character at each index is a space or a letter
+//if it is a space it pushes a SPACE into the underscore array that appears on the screen
+//if it is not a space then it must be a letter so it pushes an underscore
+//after it pushes the space or letter onto the array it uses the join function to make it into a string at the songNameElement on the screen
 for (i=0; i < wordArray.length; i++){
 
-        letterAsLowercase = wordArray[i].toLowerCase();
+        var letterAsLowercase = wordArray[i].toLowerCase();
 
         console.log(letterAsLowercase);
 
-        if(letterAsLowercase === ("a" || "b" || "c" || "d" || "e" || "f" || "g" || "h" || "i" || "j" || "k" || "l" || "m" || "n" || "o" || "p" || "q" || "r" || "s" || "t" || "u" || "v" || "w" || "x" || "y" || "z")){
+        if(letterAsLowercase === " "){
 
-        console.log("this is a letter");
-
-        //songNameElement.innerHTML = ("_ ");  
-
-        artistNameElement.innerHTML = (matchingArtistName);
-
-        }
-        else if(wordArray.includes(" ")){
             console.log("this is a space");
-           songNameElement.innerHTML =(" ");
+            underscoreArray.push(" ");
+            songNameElement.innerHTML = underscoreArray.join("");
+            
+
         }
 
+        else{
 
-        
+            console.log("key is equal to letter")
+            underscoreArray.push("_");
+            songNameElement.innerHTML = underscoreArray.join("");
             
+
+        }
+                   
 }
 
-//onKeyUp assign key to letter variable and make it lowercase
-
+//capture letter press
 document.onkeyup = function (event) {
 
 letter = event.key;
 letter = letter.toLowerCase();
-randomSong = randomSong.toLowerCase();
-
-            console.log(letter);
 
 
-// if letter chosen is equal to a letter in the randomSong then print msg to console
+//push the letter pressed onto an array for lettersAlreadyGuessed and then print the array to the screen
+lettersAlreadyGuessedArray.push(letter);
+lettersAlreadyGuessed.innerHTML = "Letters Already Guessed: " + lettersAlreadyGuessedArray.join("");
 
-      if (randomSong.includes(letter)){
 
+
+//AFTER KEY PRESS loop through word array, convert each letter to lowercase
+//then check to see if the letter at the current index of the array equals the letter saved on the key press
+//if it equals it then use the function splice to replace the underscore at the current index (i) of the loop
+//if it does not equal then reduce number of guesses remaining
+    for (i=0; i < wordArray.length; i++){
+
+        letterAsLowercase = wordArray[i].toLowerCase();
+        
             
 
-            console.log("add letter dynamically to the html and increase score");
+                
+            if (letter == letterAsLowercase){
+
+                     underscoreArray.splice(i, 1, letter);
+
+                     songNameElement.innerHTML = underscoreArray.join("");
 
 
-        }
-        else{
+                     
+                 }
+       
+       
+        else {
 
-            console.log("lose one point");
+                numberofGuessesRemaining = numberofGuessesRemaining - 1;
+                numberOfGuessesElement.innerHTML = "Number of Guesses Remaining: " + numberofGuessesRemaining;
+
+                if(numberOfGuessesRemaining = 0){
+
+                    alert("Oops, you've downloaded a virus.");
+
+                    }
+
+                
+
+
+             }
+
+
+        
+
 
         }
 
     }
+
+
 
    });
 
